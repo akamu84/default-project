@@ -1,23 +1,23 @@
-import { Route } from "@tanstack/react-router";
-import { z } from "zod";
-import OrderDetailPage from "../pages/OrderDetailPage.tsx";
-import OrdersPage from "../pages/OrdersPage.tsx";
-import { authenticatedRoute } from "./baseRoutes.ts";
+import { Route } from '@tanstack/react-router';
+import { z } from 'zod';
+import OrderDetailPage from '../pages/OrderDetailPage.tsx';
+import OrdersPage from '../pages/OrdersPage.tsx';
+import { authenticatedRoute } from './baseRoutes.ts';
 
 export const orderRoute = new Route({
   getParentRoute: () => authenticatedRoute,
-  path: "order",
+  path: 'order',
 });
 
 export const orderIndexRoute = new Route({
   getParentRoute: () => orderRoute,
-  path: "/",
+  path: '/',
   component: OrdersPage,
 });
 
 export const orderDetailRoute = new Route({
   getParentRoute: () => orderRoute,
-  path: "$orderId",
+  path: '$orderId',
   parseParams: (params) => ({
     orderId: z.number().int().parse(Number(params.orderId)),
   }),

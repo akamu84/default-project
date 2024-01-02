@@ -1,10 +1,10 @@
-import { Outlet, ScrollRestoration } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import RouterNavLink from "../components/RouterNavLink.tsx";
-import { useOktaAuth } from "@okta/okta-react";
-import { AppShell, Burger, Button, Stack } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { IconLogout } from "@tabler/icons-react";
+import { Outlet, ScrollRestoration } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import RouterNavLink from '../components/RouterNavLink.tsx';
+import { useOktaAuth } from '@okta/okta-react';
+import { AppShell, Burger, Button, Stack } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconLogout } from '@tabler/icons-react';
 
 const AppContainer = () => {
   const { oktaAuth, authState } = useOktaAuth();
@@ -16,7 +16,7 @@ const AppContainer = () => {
         header={{ height: 60 }}
         navbar={{
           width: 300,
-          breakpoint: "sm",
+          breakpoint: 'sm',
           collapsed: { mobile: !opened },
         }}
         padding="md"

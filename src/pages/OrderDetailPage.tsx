@@ -1,4 +1,4 @@
-import { orderDetailRoute } from "../routes/orderRoutes.ts";
+import { orderDetailRoute } from '../routes/orderRoutes.ts';
 
 const OrderDetailPage = () => {
   const { orderId } = orderDetailRoute.useParams();

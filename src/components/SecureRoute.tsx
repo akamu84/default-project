@@ -1,8 +1,8 @@
-import { useOktaAuth } from "@okta/okta-react";
-import { Outlet } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { toRelativeUrl } from "@okta/okta-auth-js";
-import { Box, LoadingOverlay } from "@mantine/core";
+import { useOktaAuth } from '@okta/okta-react';
+import { Outlet } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { toRelativeUrl } from '@okta/okta-auth-js';
+import { Box, LoadingOverlay } from '@mantine/core';
 
 const SecureRoute = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -15,7 +15,7 @@ const SecureRoute = () => {
     if (!authState?.isAuthenticated) {
       const originalUri = toRelativeUrl(
         window.location.href,
-        window.location.origin,
+        window.location.origin
       );
       oktaAuth.setOriginalUri(originalUri);
       oktaAuth.signInWithRedirect();
@@ -28,8 +28,8 @@ const SecureRoute = () => {
         <LoadingOverlay
           visible
           zIndex={1000}
-          overlayProps={{ radius: "sm", blur: 2 }}
-          loaderProps={{ type: "dots", size: 50 }}
+          overlayProps={{ radius: 'sm', blur: 2 }}
+          loaderProps={{ type: 'dots', size: 50 }}
         />
       </Box>
     );

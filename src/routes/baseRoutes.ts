@@ -1,8 +1,8 @@
-import { NotFoundRoute, Route } from "@tanstack/react-router";
-import NotFoundPage from "../pages/NotFoundPage.tsx";
-import { rootRoute } from "./rootRoute.ts";
-import { LoginCallback } from "@okta/okta-react";
-import SecureRoute from "../components/SecureRoute.tsx";
+import { NotFoundRoute, Route } from '@tanstack/react-router';
+import NotFoundPage from '../pages/NotFoundPage.tsx';
+import { rootRoute } from './rootRoute.ts';
+import { LoginCallback } from '@okta/okta-react';
+import SecureRoute from '../components/SecureRoute.tsx';
 
 export const notFoundRoute = new NotFoundRoute({
   getParentRoute: () => rootRoute,
@@ -11,22 +11,22 @@ export const notFoundRoute = new NotFoundRoute({
 
 export const indexRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "/",
+  path: '/',
 });
 
 export const loginRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "login",
+  path: 'login',
 });
 
 export const callbackRoute = new Route({
   getParentRoute: () => loginRoute,
-  path: "callback",
+  path: 'callback',
   component: LoginCallback,
 });
 
 export const authenticatedRoute = new Route({
   getParentRoute: () => rootRoute,
-  id: "auth",
+  id: 'auth',
   component: SecureRoute,
 });
