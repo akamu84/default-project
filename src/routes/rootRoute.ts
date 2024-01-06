@@ -1,11 +1,6 @@
-import { rootRouteWithContext } from '@tanstack/react-router';
+import { RootRoute } from '@tanstack/react-router';
 import AppContainer from '../layout/AppContainer.tsx';
-import { IOktaContext } from '@okta/okta-react/bundles/types/OktaContext';
 
-export interface RouterContext {
-  oktaContext?: IOktaContext;
-}
-
-export const rootRoute = rootRouteWithContext<RouterContext>()({
+export const rootRoute = new RootRoute({
   component: AppContainer,
 });

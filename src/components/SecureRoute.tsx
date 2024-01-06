@@ -20,7 +20,7 @@ const SecureRoute = () => {
       oktaAuth.setOriginalUri(originalUri);
       oktaAuth.signInWithRedirect();
     }
-  }, [oktaAuth, !!authState, authState?.isAuthenticated]);
+  }, [oktaAuth, authState]);
 
   if (!authState?.isAuthenticated)
     return (

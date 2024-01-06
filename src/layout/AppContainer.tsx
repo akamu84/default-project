@@ -30,7 +30,7 @@ const AppContainer = () => {
           <Stack justify="space-between" h="100%">
             <Stack>
               <RouterNavLink to="/" label="Home" />
-              <RouterNavLink to="/order" label="Orders" />
+              <RouterNavLink to="/orders" label="Orders" />
             </Stack>
             {authState?.isAuthenticated && (
               <Button
