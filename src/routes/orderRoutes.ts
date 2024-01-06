@@ -27,7 +27,7 @@ export const orderDetailRoute = new Route({
   parseParams: (params) => ({
     orderId: z.number().int().parse(Number(params.orderId)),
   }),
-  // stringifyParams: ({ orderId }) => ({ orderId: `${orderId}` }),
+  stringifyParams: ({ orderId }) => ({ orderId: `${orderId}` }),
   loader: async ({ context: { queryClient }, params: { orderId } }) =>
     await queryClient.prefetchQuery(orderQueryOptions(orderId)),
   component: OrderDetailPage,

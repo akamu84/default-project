@@ -5,32 +5,16 @@ interface Order {
   total: number;
 }
 
-class NotFoundError extends Error {}
-
-export const fetchOrder = async (orderId: number) => {
+export const fetchOrder = async (orderId: number): Promise<Order> => {
   console.log(`Fetching order with id ${orderId}...`);
-  await new Promise((r) => setTimeout(r, 500));
-  const post = await axios
-    .get<Order>(`http://localhost:3000/orders/${orderId}`)
-    .then((r) => r.data);
-
-  if (!post) {
-    throw new NotFoundError(`Order with id "${orderId}" not found!`);
-  }
-
-  return post;
+  const response = await axios.get<Order>(
+    `http://localhost:3000/orders/${orderId}`
+  );
+  return response.data;
 };
 
-export const fetchOrders = async () => {
+export const fetchOrders = async (): Promise<Order[]> => {
   console.log(`Fetching orders...`);
-  await new Promise((r) => setTimeout(r, 500));
-  const post = await axios
-    .get<Order[]>(`http://localhost:3000/orders`)
-    .then((r) => r.data);
-
-  if (!post) {
-    throw new NotFoundError(`Orders not found!`);
-  }
-
-  return post;
+  const response = await axios.get<Order[]>(`http://localhost:3000/orders`);
+  return response.data;
 };

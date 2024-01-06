@@ -13,6 +13,7 @@ import { notFoundRoute } from './routes/baseRoutes.ts';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import { Notifications } from '@mantine/notifications';
+import { AxiosError } from 'axios';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-71511401.okta.com/oauth2/default',
@@ -34,6 +35,7 @@ declare module '@tanstack/react-router' {
   interface Register {
     // This infers the type of our router and registers it across your entire project
     router: typeof router;
+    defaultError: AxiosError;
   }
 }
 
