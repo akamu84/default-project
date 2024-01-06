@@ -2,7 +2,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import { Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { toRelativeUrl } from '@okta/okta-auth-js';
-import { Box, LoadingOverlay } from '@mantine/core';
+import PendingLoader from './PendingLoader.tsx';
 
 const SecureRoute = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -22,17 +22,7 @@ const SecureRoute = () => {
     }
   }, [oktaAuth, authState]);
 
-  if (!authState?.isAuthenticated)
-    return (
-      <Box>
-        <LoadingOverlay
-          visible
-          zIndex={1000}
-          overlayProps={{ radius: 'sm', blur: 2 }}
-          loaderProps={{ type: 'dots', size: 50 }}
-        />
-      </Box>
-    );
+  if (!authState?.isAuthenticated) return <PendingLoader />;
 
   return <Outlet />;
 };

@@ -3,6 +3,8 @@ import { z } from 'zod';
 import OrderDetailPage from '../pages/OrderDetailPage.tsx';
 import OrdersPage from '../pages/OrdersPage.tsx';
 import { authenticatedRoute } from './baseRoutes.ts';
+import { orderQueryOptions, ordersQueryOptions } from '../queryOptions.ts';
+import PendingLoader from '../components/PendingLoader.tsx';
 import NotFoundPage from '../pages/NotFoundPage.tsx';
 
 export const orderRoute = new Route({
@@ -13,6 +15,9 @@ export const orderRoute = new Route({
 export const orderIndexRoute = new Route({
   getParentRoute: () => orderRoute,
   path: '/',
+  loader: ({ context: { queryClient } }) =>
+    queryClient.prefetchQuery(ordersQueryOptions()),
+  pendingComponent: PendingLoader,
   component: OrdersPage,
 });
 
@@ -22,7 +27,10 @@ export const orderDetailRoute = new Route({
   parseParams: (params) => ({
     orderId: z.number().int().parse(Number(params.orderId)),
   }),
-  stringifyParams: ({ orderId }) => ({ orderId: `${orderId}` }),
+  // stringifyParams: ({ orderId }) => ({ orderId: `${orderId}` }),
+  loader: async ({ context: { queryClient }, params: { orderId } }) =>
+    await queryClient.prefetchQuery(orderQueryOptions(orderId)),
   component: OrderDetailPage,
   errorComponent: NotFoundPage,
+  pendingComponent: PendingLoader,
 });

@@ -1,6 +1,11 @@
-import { RootRoute } from '@tanstack/react-router';
+import { rootRouteWithContext } from '@tanstack/react-router';
 import AppContainer from '../layout/AppContainer.tsx';
+import { QueryClient } from '@tanstack/react-query';
 
-export const rootRoute = new RootRoute({
+interface RouteContext {
+  queryClient: QueryClient;
+}
+
+export const rootRoute = rootRouteWithContext<RouteContext>()({
   component: AppContainer,
 });
