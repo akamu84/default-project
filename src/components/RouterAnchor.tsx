@@ -2,9 +2,9 @@ import { Link, LinkProps } from '@tanstack/react-router';
 import { ReactNode } from 'react';
 import { Anchor } from '@mantine/core';
 
-export interface RouterAnchorProps extends LinkProps {
+export type RouterAnchorProps = {
   children: ReactNode;
-}
+} & LinkProps;
 
 const RouterAnchor = ({ children, ...props }: RouterAnchorProps) => {
   return (

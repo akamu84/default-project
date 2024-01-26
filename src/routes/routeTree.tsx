@@ -8,7 +8,7 @@ import {
   callbackRoute,
   indexRoute,
   loginRoute,
-} from './baseRoutes.ts';
+} from './baseRoutes.tsx';
 import { rootRoute } from './rootRoute.ts';
 
 export const routeTree = rootRoute.addChildren([

@@ -5,15 +5,17 @@ import OktaAuth, { toRelativeUrl } from '@okta/okta-auth-js';
 import { Security } from '@okta/okta-react';
 import { RestoreOriginalUriFunction } from '@okta/okta-react/bundles/types/OktaContext';
 import { MantineProvider } from '@mantine/core';
-import { Router, RouterProvider } from '@tanstack/react-router';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { notFoundRoute } from './routes/baseRoutes.ts';
+import { notFoundRoute } from './routes/baseRoutes.tsx';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import { Notifications } from '@mantine/notifications';
 import { AxiosError } from 'axios';
+import PendingLoader from './components/PendingLoader.tsx';
+import NotFoundPage from './pages/NotFoundPage.tsx';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-71511401.okta.com/oauth2/default',
@@ -23,11 +25,13 @@ const oktaAuth = new OktaAuth({
 
 const queryClient = new QueryClient();
 
-const router = new Router({
+const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
   notFoundRoute,
+  defaultPendingComponent: PendingLoader,
+  defaultErrorComponent: NotFoundPage,
   context: { queryClient },
 });
 
@@ -43,7 +47,6 @@ const restoreOriginalUri: RestoreOriginalUriFunction = async (
   _oktaAuth,
   originalUri
 ) => {
-  console.log(originalUri);
   router.history.push(
     toRelativeUrl(originalUri || '/', window.location.origin)
   );
